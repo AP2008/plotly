@@ -96,14 +96,11 @@ fn main() -> Result<()> {
     let p = PathBuf::from(env::var("OUT_DIR").unwrap());
     let kaleido_zip_file = p.join("kaleido.zip");
 
-    let mut cmd = Command::new("cargo")
-        .args(&["install", "ruget"])
-        .spawn()
-        .unwrap();
-    cmd.wait()?;
+    
 
-    let mut cmd = Command::new("ruget")
+    let mut cmd = Command::new("curl")
         .args(&[
+            "-L",
             KALEIDO_URL,
             "-o",
             kaleido_zip_file.as_path().to_str().unwrap(),
